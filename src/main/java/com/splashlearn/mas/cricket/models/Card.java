@@ -31,4 +31,11 @@ public class Card {
   public void setAttributes(Map<CardAttribute, Integer> attributes) {
     this.attributes = attributes;
   }
+
+  public void printCardDetails(){
+    System.out.println("Player Name : " + playerName);
+    for (Map.Entry<CardAttribute, Integer> entry : attributes.entrySet()) {
+      System.out.println(entry.getKey() + " : " + entry.getValue());
+    }
+  }
 }

@@ -53,5 +53,6 @@ public class PowerPlayMode implements SpecialMode {
         }
         return -1; // Lose if none win
     }
+
 }
 

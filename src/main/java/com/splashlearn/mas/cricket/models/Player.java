@@ -14,10 +14,14 @@ public interface Player {
     void removeHealth(double value);
     List<Card> getCards();
     Card removeCard();
-    int getRemainingSpecialMode();
-    boolean setSpecialModeActive(String modeName);
+    boolean  isSpecialModeUsed();
+    SpecialMode setSpecialModeActive();
     boolean isSpecialModeActive();
     Card selectCard(); // different for human vs. AI
     CardAttribute selectAttribute();
     SpecialMode getActiveSpecialMode();
+    public SpecialMode getSelectedSpecialMode();
+    void selectSpecialMode();
+    Card getSelectedCard();
+    void setSelectedCard(Card card);
 }

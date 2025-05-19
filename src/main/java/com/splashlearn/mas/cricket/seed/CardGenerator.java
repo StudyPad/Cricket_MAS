@@ -25,12 +25,9 @@ public class CardGenerator {
 
     private Map<CardAttribute, Integer> generateRandomAttributes() {
         Map<CardAttribute, Integer> attributes = new EnumMap<>(CardAttribute.class);
-        attributes.put(CardAttribute.RUNS, random.nextInt(100_001));
-        attributes.put(CardAttribute.MATCHES, random.nextInt(501));
-        attributes.put(CardAttribute.CENTURIES, random.nextInt(101));
-        attributes.put(CardAttribute.HALF_CENTURIES, random.nextInt(81));
-        attributes.put(CardAttribute.CATCHES, random.nextInt(381));
-        attributes.put(CardAttribute.WICKETS, random.nextInt(961));
+        for (CardAttribute attribute : CardAttribute.values()) {
+            attributes.put(attribute, random.nextInt(attribute.getMaxRange()));
+        }
         return attributes;
     }
 }

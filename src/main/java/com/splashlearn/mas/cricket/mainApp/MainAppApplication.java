@@ -26,11 +26,13 @@ public class MainAppApplication {
         // Prompt for player names
 		System.out.print("Please enter first player name: ");
 		String player1Name = sc.nextLine();
+
 		System.out.print("Please enter second player name: ");
 		String player2Name = sc.nextLine();
+
         // Create players with entered names
-		Player player1 = new HumanPlayer(player1Name, "P1", new CardGenerator(new Random()).generateCards(10), specialModeList);
-		Player player2 = new HumanPlayer(player2Name, "P2", new CardGenerator(new Random()).generateCards(10), specialModeList);
+		Player player1 = new HumanPlayer(player1Name, "P1", new CardGenerator(new Random()).generateCards(10));
+		Player player2 = new HumanPlayer(player2Name, "P2", new CardGenerator(new Random()).generateCards(10));
 
 		ComparisonStrategy strategy = new BasicComparisonStrategy(); // Your implementation
 		GameEngine engine = new GameEngine(player1, player2, strategy);

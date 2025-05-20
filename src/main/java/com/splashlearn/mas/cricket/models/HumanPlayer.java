@@ -60,9 +60,9 @@ public class HumanPlayer implements Player {
     }
 
     @Override
-    public Card removeCard() {
-        if (cards.isEmpty()) return null;
-        return cards.remove(0);
+    public void removeCard() {
+        if (cards.isEmpty()) return;
+        cards.remove(selectedCard);
     }
 
     @Override
@@ -150,7 +150,7 @@ return null;
     public void selectSpecialMode(){
         Map<Integer, SpecialMode> specialModeMap = SpecialModeFactory.getAllSpecialModes();
         if(selectedSpecialMode == null){
-            System.out.println("Available Special Modes:");
+            System.out.println(this.name + " Your Available Special Modes:");
             for (Map.Entry<Integer, SpecialMode> entry : specialModeMap.entrySet()) {
                 System.out.println("ID: " + entry.getKey() + ", Name: " + entry.getValue().getName());
             }

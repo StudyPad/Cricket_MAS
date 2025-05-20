@@ -12,7 +12,7 @@ public interface Player {
     double getHealth();
     void removeHealth(double value);
     List<Card> getCards();
-    Card removeCard();
+    void removeCard();
     boolean  isSpecialModeUsed();
     SpecialMode setSpecialModeActive();
     boolean isSpecialModeActive();

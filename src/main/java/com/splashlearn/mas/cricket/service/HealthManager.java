@@ -1,6 +1,6 @@
 package com.splashlearn.mas.cricket.service;
 
-import com.splashlearn.mas.cricket.models.HumanPlayer;
+
 import com.splashlearn.mas.cricket.models.Player;
 
 public class HealthManager {
@@ -10,7 +10,7 @@ public class HealthManager {
         if (winner.isSpecialModeActive()) {
             damage = winner.getActiveSpecialMode().getUpdatedDamageDealt(baseDamage);
         }
-        loser.removeHealth(damage);
+        loser.removeHealth(damage * 0.10);
     }
 }
 

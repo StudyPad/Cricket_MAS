@@ -116,25 +116,36 @@ return null;
     }
 
     @Override
-    public CardAttribute selectAttribute() {
+    public List<CardAttribute> selectAttribute(Player player) {
         if (cards.isEmpty()) return null;
-
-//        Card selectedCard = selectCard();
+        List<CardAttribute> result = new ArrayList<>();
         Card selectedCard = this.getSelectedCard();
         selectedCard.printCardDetails();
-        Map<CardAttribute, Integer> attributes = selectedCard.getAttributes();
+        Scanner scanner = new Scanner(System.in);
 
+        if(player.isSpecialModeActive() && player.getActiveSpecialMode().getName().equalsIgnoreCase("Power Play Mode")){
+            int j = 2;
+            while(j > 0){
+               getAttribute(result,selectedCard,scanner);
+                j--;
+            }
+        }else{
+            getAttribute(result,selectedCard,scanner);
+        }
+        return result; // basic validation assumed
+    }
+
+    void getAttribute(List<CardAttribute> result, Card selectedCard, Scanner scanner){
+        Map<CardAttribute, Integer> attributes = selectedCard.getAttributes();
         System.out.println("Choose an attribute to compare:");
-        int i = 1;
         List<CardAttribute> attributeList = new ArrayList<>(attributes.keySet());
+        int i = 1;
         for (CardAttribute attr : attributeList) {
             System.out.println(i + ". " + attr);
             i++;
         }
-
-        Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
-        return attributeList.get(choice - 1); // basic validation assumed
+        result.add(attributeList.get(choice - 1));
     }
 
     @Override

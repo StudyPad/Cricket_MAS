@@ -6,6 +6,8 @@ import com.splashlearn.mas.cricket.models.Player;
 import com.splashlearn.mas.cricket.seed.CardAttribute;
 import com.splashlearn.mas.cricket.service.ComparisonStrategy;
 
+import java.util.List;
+
 public class WorldCupMode implements SpecialMode {
 
     private boolean used = false;
@@ -38,8 +40,8 @@ public class WorldCupMode implements SpecialMode {
     }
 
     @Override
-    public int compare(Card playerCard, Card enemyCard, CardAttribute attribute, ComparisonStrategy strategy) {
-        return strategy.compare(playerCard, enemyCard, attribute);
+    public int compare(Card playerCard, Card enemyCard, List<CardAttribute> attributes, ComparisonStrategy strategy) {
+        return strategy.compare(playerCard, enemyCard, attributes);
     }
 }
 

@@ -17,7 +17,7 @@ public interface Player {
     SpecialMode setSpecialModeActive();
     boolean isSpecialModeActive();
     Card selectCard(); // different for human vs. AI
-    CardAttribute selectAttribute();
+    List<CardAttribute> selectAttribute(Player player);
     SpecialMode getActiveSpecialMode();
     public SpecialMode getSelectedSpecialMode();
     void selectSpecialMode();

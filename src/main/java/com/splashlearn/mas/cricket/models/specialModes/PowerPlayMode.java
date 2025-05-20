@@ -6,6 +6,7 @@ import com.splashlearn.mas.cricket.models.Player;
 import com.splashlearn.mas.cricket.seed.CardAttribute;
 import com.splashlearn.mas.cricket.service.ComparisonStrategy;
 
+import java.util.List;
 import java.util.Set;
 
 public class PowerPlayMode implements SpecialMode {
@@ -46,12 +47,9 @@ public class PowerPlayMode implements SpecialMode {
     }
 
     @Override
-    public int compare(Card playerCard, Card enemyCard, CardAttribute ignored, ComparisonStrategy strategy) {
-        for (CardAttribute attr : attributes) {
-            int result = strategy.compare(playerCard, enemyCard, attr);
-            if (result == 1) return 1; // Player wins on any attribute
-        }
-        return -1; // Lose if none win
+    public int compare(Card playerCard, Card enemyCard, List<CardAttribute> attributes, ComparisonStrategy strategy) {
+             return strategy.compare(playerCard, enemyCard, attributes);
+
     }
 
 }

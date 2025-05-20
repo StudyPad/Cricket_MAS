@@ -31,11 +31,11 @@ public class PlayerHand {
 
         // 2. Card selection phase
         Card card1 = selectCardFromPlayer(p1);
-        CardAttribute selectedAttribute = p1.selectAttribute();
+        List<CardAttribute> selectedAttributes = p1.selectAttribute(p1);
         Card card2 = selectCardFromPlayer(p2);
 
         // 3. Comparison phase
-        int result = compareCards(card1, card2, selectedAttribute);
+        int result = compareCards(card1, card2, selectedAttributes);
 
         // 4. Resolution phase
         resolveRound(result, p1, p2);
@@ -66,18 +66,28 @@ public class PlayerHand {
     /**
      * Compare the attribute values between two cards
      */
-    private int compareCards(Card card1, Card card2, CardAttribute selectedAttribute) {
-        Integer value1 = getAttributeValue(card1, selectedAttribute);
-        Integer value2 = getAttributeValue(card2, selectedAttribute);
-
-        if (value1 == null || value2 == null) {
-            System.out.println("Attribute missing on one of the cards.");
+    private int compareCards(Card card1, Card card2, List<CardAttribute> selectedAttributes) {
+        if (card1 == null || card2 == null || selectedAttributes == null || selectedAttributes.isEmpty()) {
+            System.out.println("Invalid input: cards or attributes missing.");
             return 0;
         }
 
-        displayAttributeValues(p1, p2, value1, value2, selectedAttribute);
 
-        return performComparison(card1, card2, selectedAttribute);
+        for (CardAttribute selectedAttribute : selectedAttributes) {
+            Integer value1 = getAttributeValue(card1, selectedAttribute);
+            Integer value2 = getAttributeValue(card2, selectedAttribute);
+
+            if (value1 == null || value2 == null) {
+                System.out.println("Attribute " + selectedAttribute + " missing on one of the cards.");
+                continue; // Skip to the next attribute
+            }
+
+            displayAttributeValues(p1, p2, value1, value2, selectedAttribute);
+
+
+        }
+        int result = performComparison(card1, card2, selectedAttributes);
+        return result;
     }
 
     /**
@@ -98,11 +108,11 @@ public class PlayerHand {
     /**
      * Perform comparison using appropriate strategy
      */
-    private int performComparison(Card card1, Card card2, CardAttribute selectedAttribute) {
+    private int performComparison(Card card1, Card card2, List<CardAttribute> selectedAttributes) {
         if (specialMode != null) {
-            return specialMode.compare(card1, card2, selectedAttribute, strategy);
+            return specialMode.compare(card1, card2, selectedAttributes, strategy);
         } else {
-            return strategy.compare(card1, card2, selectedAttribute);
+            return strategy.compare(card1, card2, selectedAttributes);
         }
     }
 
@@ -111,9 +121,9 @@ public class PlayerHand {
      */
     private void resolveRound(int result, Player p1, Player p2) {
         if (result > 0) {
-            healthManager.applyDamage(p2, p1, 10); // p1 wins
+            healthManager.applyDamage(p2, p1, p2.getHealth()); // p1 wins
         } else if (result < 0) {
-            healthManager.applyDamage(p1, p2, 10); // p2 wins
+            healthManager.applyDamage(p1, p2, p1.getHealth()); // p2 wins
         } else {
             System.out.println("It's a tie! No damage dealt.");
         }

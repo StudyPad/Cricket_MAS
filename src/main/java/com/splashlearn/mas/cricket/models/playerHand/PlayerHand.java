@@ -94,7 +94,7 @@ public class PlayerHand {
      * Get attribute value from a card
      */
     private Integer getAttributeValue(Card card, CardAttribute attribute) {
-        return card.getAttributes().get(attribute);
+        return card.getAttributes().get(attribute).getAttributeValue();
     }
 
     /**

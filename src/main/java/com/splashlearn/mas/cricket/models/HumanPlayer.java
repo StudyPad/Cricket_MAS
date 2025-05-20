@@ -1,5 +1,6 @@
 package com.splashlearn.mas.cricket.models;
 
+import com.splashlearn.mas.cricket.models.cardAttributes.BaseCardAttribute;
 import com.splashlearn.mas.cricket.models.specialModes.SpecialMode;
 import com.splashlearn.mas.cricket.models.specialModes.SpecialModeFactory;
 import com.splashlearn.mas.cricket.seed.CardAttribute;
@@ -73,7 +74,7 @@ public class HumanPlayer implements Player {
 
     @Override
     public SpecialMode setSpecialModeActive() {
-        System.out.println("Use your special Mode -" + this.getActiveSpecialMode().getName() + " : (1 for yes 0 for no)");
+        System.out.println(this.name + " Use your special Mode -" + this.getActiveSpecialMode().getName() + " : (1 for yes 0 for no)");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
         if(choice ==1 ){
@@ -94,16 +95,33 @@ return null;
     public Card selectCard() {
         // For human players, this would be input-driven in a real system
 
-        for(int i=0;i<cards.size(); i++){
+        for(int i=1;i<=cards.size(); i++){
             System.out.println("Card : " + i);
-            cards.get(i).printCardDetails();
+            cards.get(i-1).printCardDetails();
         }
-        System.out.println("Select a Card : ");
+        System.out.println(this.name +  " Select a Card: ");
         Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        Card card = cards.get(choice);
-        setSelectedCard(card);
-        return card; // placeholder
+        int choice = 0;
+
+        while (true) {
+            System.out.print("Enter your choice (1 to " + cards.size() + "): ");
+
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+                if (choice >= 1 && choice <= cards.size()) {
+                    break; // valid input, exit loop
+                } else {
+                    System.out.println("Invalid choice. Please enter a number between 1 and " + cards.size() + ".");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next(); // consume the invalid input
+            }
+        }
+
+        Card selectedCard = cards.get(choice - 1);
+        setSelectedCard(selectedCard);
+        return selectedCard; // placeholder
     }
 
     @Override
@@ -136,7 +154,7 @@ return null;
     }
 
     void getAttribute(List<CardAttribute> result, Card selectedCard, Scanner scanner){
-        Map<CardAttribute, Integer> attributes = selectedCard.getAttributes();
+        Map<CardAttribute, BaseCardAttribute> attributes = selectedCard.getAttributes();
         System.out.println("Choose an attribute to compare:");
         List<CardAttribute> attributeList = new ArrayList<>(attributes.keySet());
         int i = 1;

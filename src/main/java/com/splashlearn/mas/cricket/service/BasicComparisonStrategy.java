@@ -18,8 +18,8 @@ public class BasicComparisonStrategy implements  ComparisonStrategy{
 
         if (attributes.size() >= 2) {
             for (CardAttribute attr : attributes) {
-                Integer playerValue = playerCard.getAttributes().get(attr);
-                Integer enemyValue = enemyCard.getAttributes().get(attr);
+                Integer playerValue = playerCard.getAttributes().get(attr).getAttributeValue();
+                Integer enemyValue = enemyCard.getAttributes().get(attr).getAttributeValue();
 
                 if (playerValue == null || enemyValue == null) {
                     throw new IllegalArgumentException("Attribute " + attr + " not found in one of the cards");
@@ -35,8 +35,8 @@ public class BasicComparisonStrategy implements  ComparisonStrategy{
         } else {
             // Fallback: compare based on a single attribute
             CardAttribute attr = attributes.get(0);
-            Integer playerValue = playerCard.getAttributes().get(attr);
-            Integer enemyValue = enemyCard.getAttributes().get(attr);
+            Integer playerValue = playerCard.getAttributes().get(attr).getAttributeValue();
+            Integer enemyValue = enemyCard.getAttributes().get(attr).getAttributeValue();
 
             if (playerValue == null || enemyValue == null) {
                 throw new IllegalArgumentException("Attribute " + attr + " not found in one of the cards");

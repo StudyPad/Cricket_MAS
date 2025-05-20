@@ -53,6 +53,7 @@ public class PlayerHand {
 
         if (!p1.isSpecialModeUsed()) {
             specialMode = p1.setSpecialModeActive();
+
         }
     }
 

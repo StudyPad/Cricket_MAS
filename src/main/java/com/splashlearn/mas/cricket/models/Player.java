@@ -14,6 +14,7 @@ public interface Player {
     List<Card> getCards();
     void removeCard();
     boolean  isSpecialModeUsed();
+    void setSpecialModeUsed(boolean status);
     SpecialMode setSpecialModeActive();
     boolean isSpecialModeActive();
     Card selectCard(); // different for human vs. AI

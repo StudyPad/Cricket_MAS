@@ -1,9 +1,9 @@
 package com.splashlearn.mas.cricket.models.specialModes;
 
+import com.splashlearn.mas.cricket.enums.SpecialModeEnum;
 import com.splashlearn.mas.cricket.models.Card;
 import com.splashlearn.mas.cricket.models.Player;
 import com.splashlearn.mas.cricket.seed.CardAttribute;
-import com.splashlearn.mas.cricket.seed.Mode;
 import com.splashlearn.mas.cricket.service.ComparisonStrategy;
 
 public class WorldCupMode implements SpecialMode {
@@ -24,7 +24,7 @@ public class WorldCupMode implements SpecialMode {
 
     @Override
     public String getName() {
-        return Mode.WorldCupMode.getName();
+        return SpecialModeEnum.WORLD_CUP.getName();
     }
 
     @Override

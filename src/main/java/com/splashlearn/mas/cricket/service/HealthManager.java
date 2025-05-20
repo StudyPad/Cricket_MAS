@@ -9,8 +9,11 @@ public class HealthManager {
 
         if (winner.isSpecialModeActive()) {
             damage = winner.getActiveSpecialMode().getUpdatedDamageDealt(baseDamage);
+            loser.removeHealth(damage);
+        }else{
+            loser.removeHealth(damage * 0.10);
         }
-        loser.removeHealth(damage * 0.10);
+
     }
 }
 

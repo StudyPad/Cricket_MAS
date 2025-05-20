@@ -71,16 +71,19 @@ public class HumanPlayer implements Player {
         return this.isSpecialModeUsed;
     }
 
+    @Override
+    public void setSpecialModeUsed(boolean status) {
+        this.isSpecialModeUsed = status;
+    }
+
 
     @Override
     public SpecialMode setSpecialModeActive() {
         System.out.println(this.name + " Use your special Mode -" + this.getActiveSpecialMode().getName() + " : (1 for yes 0 for no)");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
-        if(choice ==1 ){
-
+        if(choice == 1 ){
             this.specialModeActive = true;
-            this.isSpecialModeUsed = true;
             return selectedSpecialMode;
         }
 return null;
@@ -133,6 +136,8 @@ return null;
         this.selectedCard = card;
     }
 
+
+
     @Override
     public List<CardAttribute> selectAttribute(Player player) {
         if (cards.isEmpty()) return null;
@@ -141,15 +146,20 @@ return null;
         selectedCard.printCardDetails();
         Scanner scanner = new Scanner(System.in);
 
-        if(player.isSpecialModeActive() && player.getActiveSpecialMode().getName().equalsIgnoreCase("Power Play Mode")){
+        if(player.isSpecialModeActive() && !player.isSpecialModeUsed() && player.getActiveSpecialMode().getName().equalsIgnoreCase("Power Play Mode")){
             int j = 2;
             while(j > 0){
                getAttribute(result,selectedCard,scanner);
                 j--;
             }
+            player.setSpecialModeUsed(true);
+        }else if(player.isSpecialModeActive()){
+            getAttribute(result,selectedCard,scanner);
+            player.setSpecialModeUsed(true);
         }else{
             getAttribute(result,selectedCard,scanner);
         }
+
         return result; // basic validation assumed
     }
 

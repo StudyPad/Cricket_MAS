@@ -44,8 +44,10 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<version>1.18.30</version> <!-- ✅ Specify version -->
+			<scope>provided</scope> <!-- ✅ Use provided scope -->
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -55,14 +57,17 @@
 
 	<build>
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.10.1</version> <!-- Optional but recommended -->
 				<configuration>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+							<version>1.18.30</version> <!-- ✅ Specify version here -->
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
@@ -79,7 +84,9 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
 		</plugins>
+
 	</build>
 
 </project>

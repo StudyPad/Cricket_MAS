@@ -4,19 +4,32 @@ public abstract class BaseCardAttribute implements ICardAttribute {
   protected String name;
   protected int value;
 
-  protected int minValue;
-  protected int maxValue;
+  protected final int minValue;
+  protected final int maxValue;
 
-  public BaseCardAttribute(String name, int value) {
+  public BaseCardAttribute(String name, int value, int minValue, int maxValue) {
     this.name = name;
-    this.minValue = 0;
-    this.maxValue = 100;
-    validateValue(value);
+    this.minValue = minValue;
+    this.maxValue = maxValue;
+    this.value = value;
+  }
+  @Override
+  public String getAttributeName() {
+    return this.name;
   }
 
-  protected void validateValue(int value) {
-    if (value < minValue || value > maxValue) {
-      throw new IllegalArgumentException("Invalid attribute value");
-    }
+  @Override
+  public void setAttributeName(String name) {
+    this.name = name;
+  }
+
+  @Override
+  public int getAttributeValue() {
+    return this.value;
+  }
+
+  @Override
+  public void setAttributeValue(int value) {
+      this.value = value;
   }
 }

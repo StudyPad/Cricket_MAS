@@ -1,9 +1,12 @@
 package com.splashlearn.mas.cricket.mainApp;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+import java.util.*;
+
+@SpringBootApplication(scanBasePackages = "com.splashlearn.mas.cricket")
 public class MainAppApplication {
 
 	public static void main(String[] args) {

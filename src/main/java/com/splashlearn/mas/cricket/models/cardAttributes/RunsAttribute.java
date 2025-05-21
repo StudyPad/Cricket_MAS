@@ -1,15 +1,8 @@
 package com.splashlearn.mas.cricket.models.cardAttributes;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+public class RunsAttribute extends  BaseCardAttribute{
+    public RunsAttribute(int value) {
+        super("Runs", value, 0, 100_000);;
+    }
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class RunsAttribute implements ICardAttribute {
-    private String attributeName;
-    private int attributeValue;
 }
